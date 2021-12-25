@@ -1,0 +1,12 @@
+.container {
+    background-color: white;
+}
+
+.container img{
+    transition: 1s;
+    width: 70%;
+ }
+
+.container img:hover{
+    transform: scale(1.01);
+}

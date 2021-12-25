@@ -1,0 +1,41 @@
+{% extends "quests/base.html" %}
+
+{% block title %}
+FoodQuest | Process
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="mx-auto div_result">
+        {% for i in test %}
+            {% if i.id == PK %}
+                <div class="text-center">
+                    <h2 class="display-5 fw-bold">Результаты теста {{ i.name_test }}</h2>
+                    <h4 class="display-8">Всего вопросов в тесте было: {{ i.questions_count }}</h4><br><br>
+                </div>
+            {% endif %}
+        {% endfor %}
+                {% for i, q, p, d in data %}
+                    {% if p %}
+                        <h5>Вопрос: {{ d }}</h5>
+                        <div class="alert alert-success" role="alert">
+                            <strong>Ответ верный</strong><br>
+                            Ваш ответ: {{ q }}<br>
+                            Правильный ответ: {{ i }}
+                        </div><br>
+                    {% else %}
+                        <h5>Вопрос: {{ d }}</h5>
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Ответ неверный</strong><br>
+                            Ваш ответ: {{ q }}<br>
+                            Правильный ответ: {{ i }}
+                        </div><br>
+                    {% endif %}
+                {% endfor %}
+        <div class="row">
+            <div class="col-2 col-md-auto mb-2"><a href="{% url 'home' %}" class="btn btn-primary">Главная</a></div>
+            <div class="col-2 col-md-auto mb-2"><a href="{% url 'quests' %}" class="btn btn-success">Продолжить</a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

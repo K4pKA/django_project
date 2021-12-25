@@ -1,0 +1,14 @@
+<html>
+<head>
+<script type='text/javascript'>
+function doLogin() {
+    document.sendin.submit();
+}
+</script>
+</head>
+<body onLoad="doLogin();">
+<form name='sendin' method='post'>
+    {% csrf_token %}
+</form>
+</body>
+</html>

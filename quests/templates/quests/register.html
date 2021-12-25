@@ -1,0 +1,93 @@
+{% extends "quests/base.html" %}
+{% load static %}
+{% block title%}
+FoodQuest | Register
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container py-5">
+    <form method="post">
+
+        <h3 class="text-center">Регистрация</h3><br><br>
+
+        <div class="mx-auto login_div">
+            <p>{{ form.errors }}</p>
+            <div class="form-group">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for i in form.errors %}
+                            <p>{{ i }}</p>
+                            <p>{{ i.tags }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Имя</label>
+                <div class="col-sm-10">
+                    {{ form.first_name }}
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Фамилия</label>
+                <div class="col-sm-10">
+                    {{ form.last_name }}
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    {{ form.email }}
+                    <small id="emailHelp" class="form-text text-muted">Мы никогда никому не передадим Вашу электронную почту.</small>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Логин</label>
+                <div class="col-sm-10">
+                    {{ form.username }}
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Пароль</label>
+                <div class="col-sm-10">
+                    {{ form.password1 }}
+                    <small id="password1HelpBlock" class="form-text text-muted">
+                        Ваш пароль должен состоять из 8–20 символов, содержать буквы и цифры и не должен содержать пробелов, специальных символов или эмодзи.
+                    </small>
+                </div>
+            </div><br>
+
+                        <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Повтор пароля</label>
+                <div class="col-sm-10">
+                    {{ form.password2 }}
+                    <small id="password2HelpBlock" class="form-text text-muted">Повтор пароля</small>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    {{ form.captcha }}
+                </div>
+            </div><br>
+
+            <div class="text-center">
+                <a href="{% url 'login' %}" class="link-secondary">Авторизация</a><br><br>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Регистрация</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock %}

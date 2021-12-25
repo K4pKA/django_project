@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type='text/javascript'>
+function doLogin() {
+    document.sendin.submit();
+}
+</script>
+</head>
+<body onLoad="doLogin();">
+<form name='sendin' method='post'>
+    {% csrf_token %}
+    {% for i in test %}
+        {% if i.id == PK %}
+            <input id="id_TestID" name="TestID" type="hidden" value="{{ i.id }}">
+            <input id="id_UserID" name="UserID" type="hidden" value="{{ user.id }}">
+            <input id="id_IsPassed" name="IsPassed" type="hidden" value="True">
+        {% endif %}
+    {% endfor %}
+</form>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{% extends "quests/base.html" %}
+
+{% block title %}
+FoodQuest | Process
+{% endblock %}
+
+{% block content %}
+
+    <div class="container py-6">
+
+        <div class="row">
+            <div class="div_process mx-auto">
+                    <div class="p-5 mb-4 bg-light rounded-3">
+                        <div class="container-fluid py-5">
+
+                            {% if PK == 1 %}
+                                {% if test1 %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Вы уже прошли этот тест!</strong>
+                                        <hr>
+                                        Примечание: если вы уже прошли тест, то новые ответы не будут сохранены. Будут загружены старые ответы.
+                                    </div>
+                                {% endif %}
+                            {% elif PK == 2 %}
+                                {% if test2 %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Вы уже прошли этот тест!</strong>
+                                        <hr>
+                                        Примечание: если вы уже прошли тест, то новые ответы не будут сохранены. Будут загружены старые ответы.
+                                    </div>
+                                {% endif %}
+                            {% elif PK == 3 %}
+                                {% if test3 %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Вы уже прошли этот тест!</strong>
+                                        <hr>
+                                        Примечание: если вы уже прошли тест, то новые ответы не будут сохранены. Будут загружены старые ответы.
+                                    </div>
+                                {% endif %}
+                            {% elif PK == 4 %}
+                                {% if test4 %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Вы уже прошли этот тест!</strong>
+                                        <hr>
+                                        Примечание: если вы уже прошли тест, то новые ответы не будут сохранены. Будут загружены старые ответы.
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+
+                            {% for i in answer %}
+                                {% if i.ProfileId.id == PK %}
+
+                                    <h3 class="display-8 fw-bold">{{ i.Title }}</h3>
+                                    <p class="lead">{{ i.Content|safe }}</p><br>
+                                    {% if i.Audio %}
+                                        <audio src="{{ i.Audio.url }}"></audio>
+                                        <audio controls>
+
+                                            <source src="{{ i.Audio.url }}" type="audio/mpeg">
+                                            Тег audio не поддерживается вашим браузером.
+                                            <a href="{{ i.Audio.url }}">Скачайте музыку</a>.
+                                        </audio>
+                                    {% endif %}
+
+                                        {% if i.QuesType == 1 %}
+                                        <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="id_QuestionID" name="QuestionID" value="{{ i.id }}">
+                                        <input type="hidden" id="id_UserId" name="UserId" value="{{ user.id }}"><br>
+                                            <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Ответ</label>
+                                            <div class="col-sm-10">
+                                            <input id="id_Answer" name="Answer" class="form-control"><br>
+                                            <small id="idhelper" class="form-text text-muted">Напиши в это поле свой ответ или верную букву в ответ на этот вопрос</small>
+                                            </div>
+                                            </div>
+                                        {% elif i.QuesType == 2 %}
+                                        <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="id_QuestionID" name="QuestionID" value="{{ i.id }}">
+                                        <input type="hidden" id="id_UserId" name="UserId" value="{{ user.id }}"><br>
+                                            <select id="id_Answer" name="Answer" class="form-select">
+                                                {% for q in answers %}
+                                                    {% if q.QuestionID.id == i.id %}
+                                                        <option value="{{ q.Answer }}">{{ q.Answer }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                            <small id="idhelp" class="form-text text-muted">Выбери верный ответ</small>
+
+                                        {% elif i.QuesType == 4 %}
+                                            <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="id_QuestionID" name="QuestionID" value="{{ i.id }}">
+                                        <input type="hidden" id="id_UserId" name="UserId" value="{{ user.id }}"><br>
+                                        <input type="hidden" id="id_Answer" name='Answer' value="{{ user.id }}"><br>
+                                        {{ form.VideoAnswer }}
+
+                                        {% endif %}
+                                        <br><br><br><br>
+
+                                        {% endif %}
+                                        {% endfor %}
+                                        <button class="btn btn-success" type="submit">Отправить</button>
+
+                                    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

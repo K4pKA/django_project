@@ -1,0 +1,92 @@
+{% extends "quests/base.html" %}
+
+{% block title%}
+FoodQuest | Feedback
+{% endblock %}
+{% block content %}
+
+<div class="container py-5 col-md-10">
+    <h1>Feedback</h1>
+    <p class="row d-flex justify-content-center lead">
+        <br>
+        Данный веб-квест на английском языке по теме "Еда" разработан для учеников 3-6 классов.
+        Он может быть использован на уроках информатики, английского языка или дан в качестве самостоятельной работы.
+        Квест подходит для групповой и индивидуальной работы, направлен на изучение нового и углубление знаний по теме.
+    </p>
+        <div class="raw div_comments mx-auto">
+        <img src="https://i.imgur.com/AucGhxV.jpg">
+        </div>
+    </br>
+    {{ like }}
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8 col-lg-9">
+            <div class="card shadow-0 border">
+                <div class="card-body p-4">
+                    <div class="form-outline mb-4">
+                        {% if user.is_authenticated %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input id="id_UserID" name="UserID" type="hidden" value="{{ user.id }}">
+                            {{ form.text }}
+                            <small class="form-label" for="text">Добавить комментарий</small><br>
+                            <br>
+                            {{ form.captcha }}<br><br>
+
+                            <button class="btn btn-success" type="submit">Добавить комментарий</button>
+                        </form>
+                        {% else %}
+                        <small class="form-label" for="a">Что бы добавить комментарий Вам нужно зарегестрироватся или авторизоватся</small><br>
+                        {% endif %}
+                    </div>
+                    <br><br>
+
+                    {% if user.is_superuser %}
+                        <h3>Комментарии: </h3>
+                        {% for i in for_admin %}
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p>{{ i.text }}</p>
+
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p class="small mb-0 ms-2">Автор: {{ i.UserID.first_name }} {{ i.UserID.last_name }}</p>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p class="small text-muted mb-0">{{ i.created_at }}&#8195;</p>
+                                            <a href="{% url 'delete' i.id %}"><p class="small text-muted mb-0">Удалить</p></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <h3>Последние комментарии:</h3>
+                        <small class="small text-muted">Все комментарии может увидеть только администратор</small><br><br>
+                        {% for i in mod %}
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p>{{ i.text }}</p>
+
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p class="small mb-0 ms-2">Автор: {{ i.UserID.first_name }} {{ i.UserID.last_name }}</p>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p class="small text-muted mb-0">{{ i.created_at }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

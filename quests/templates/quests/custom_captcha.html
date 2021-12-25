@@ -1,0 +1,13 @@
+{% load i18n %}
+{% spaceless %}
+<div class="row">
+  <div class="col">
+    <img src="{{ image }}" alt="captcha" class="img-thumbnail" />
+  </div>
+  <div class="col">
+    {% include "django/forms/widgets/multiwidget.html" %}<br>
+    <small id='CaptchaHelp' class="form-text text-muted">Расшифруйте каптчу с картинки</small>
+  </div>
+</div>
+
+{% endspaceless %}

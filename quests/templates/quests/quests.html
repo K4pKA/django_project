@@ -1,0 +1,80 @@
+{% extends "quests/base.html" %}
+
+{% block title%}
+FoodQuest | Process
+{% endblock %}
+
+{% block content %}
+<div class="container overflow-hidden">
+    <div class="row gy-5 div_result mx-auto">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Get started</h1>
+            <p class="col-md-8 fs-4">Learn new words to be ready for the quest<br>Изучи новые слова для прохождения квеста</p>
+            {% if request.user.is_authenticated %}
+                {% if test1 %}
+                    <div class="alert alert-success" role="alert">
+                        <p>Вы прошли этот тест &#9989;</p>
+                        <a href="{% url 'result' 1 %}"><button class="btn btn-success btn-lg" type="button">Узнать результат</button></a>
+                    </div>
+                {% else %}
+                <a href="{% url 'view' 1 %}"><button class="btn btn-primary btn-lg" type="button">Get started!</button></a>
+                {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}"><button class="btn btn-primary btn-lg" type="button">Log in</button></a>
+            {% endif %}
+        </div>
+
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Learn and play!</h1>
+            <p class="col-md-8 fs-4">Do you know all kinds of food in English? Check yourself!</p>
+            {% if request.user.is_authenticated %}
+                {% if test2 %}
+                    <div class="alert alert-success" role="alert">
+                        <p>Вы прошли этот тест &#9989;</p>
+                        <a href="{% url 'result' 2 %}"><button class="btn btn-success btn-lg" type="button">Узнать результат</button></a>
+                    </div>
+                {% else %}
+                <a href="{% url 'view' 2 %}"><button class="btn btn-primary btn-lg" type="button">Learn and play!</button></a>
+                {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}"><button class="btn btn-primary btn-lg" type="button">Log in</button></a>
+            {% endif %}
+        </div>
+
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Get grammar!</h1>
+            <p class="col-md-8 fs-4">Study English grammar and have fun!</p>
+            {% if request.user.is_authenticated %}
+                {% if test3 %}
+                    <div class="alert alert-success" role="alert">
+                        <p>Вы прошли этот тест &#9989;</p>
+                        <a href="{% url 'result' 3  %}"><button class="btn btn-success btn-lg" type="button">Узнать результат</button></a>
+                    </div>
+                {% else %}
+                <a href="{% url 'view' 3 %}"><button class="btn btn-primary btn-lg" type="button">Learn and play!</button></a>
+                {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}"><button class="btn btn-primary btn-lg" type="button">Log in</button></a>
+            {% endif %}
+        </div>
+
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Communication box!</h1>
+            <p class="col-md-8 fs-4">Are you a good actor? It`s high time to check!</p>
+            {% if request.user.is_authenticated %}
+                {% if test4 %}
+                    <div class="alert alert-success" role="alert">
+                        <p>Вы прошли этот тест &#9989;</p>
+                        <a href="{% url 'result' 4 %}"><button class="btn btn-success btn-lg" type="button">Узнать результат</button></a>
+                    </div>
+                {% else %}
+                <a href="{% url 'view' 4 %}"><button class="btn btn-primary btn-lg" type="button">Learn and play!</button></a>
+                {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}"><button class="btn btn-primary btn-lg" type="button">Log in</button></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
